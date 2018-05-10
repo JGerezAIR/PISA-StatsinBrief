@@ -41,7 +41,7 @@ replace science_careers = 1 if OCOD3_N == 2164 | OCOD3_N == 2165
 
 * All of subgroup 22 except 223
 
-replace science_careers = 1 if (OCOD3_N >= 2200) & (OCOD3_N <= 2230)
+replace science_careers = 1 if (OCOD3_N >= 2200) & (OCOD3_N <= 2222)
 replace science_careers = 1 if (OCOD3_N >= 2240) & (OCOD3_N <= 2269)
 
 * All of subgroup 25
