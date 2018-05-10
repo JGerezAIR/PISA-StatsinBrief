@@ -1,6 +1,6 @@
 * PISA Stats in Brief *
 
-use "C:/Users/JGerez/Desktop/PISA-StatsinBrief/PISA 2015 USA Student Background.dta"
+use "H:/5.2_main/PISA/PISA 2015/PISA-StatsinBrief/PISA 2015 USA Student Background.dta"
 
 * Recode occupational categories into binary science vs. non-science based on Volume 1 of the PISA report
 
