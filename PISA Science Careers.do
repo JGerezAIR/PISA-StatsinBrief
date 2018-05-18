@@ -6,11 +6,15 @@ use "H:/5.2_main/PISA/PISA 2015/PISA-StatsinBrief/PISA 2015 USA Student Backgrou
 
 * Create new science careers variable
 
-gen science_careers = .
+local var 1 2 3
 
-* Recode ISCO-08 Occupation code - Self to numeric
+foreach i in `var' {
 
-destring OCOD3, generate(OCOD3_N)
+gen science_careers`i' = .
+
+* Recode ISCO-08 Occupation code to numeric
+
+destring OCOD`i', generate(OCOD`i'_N)
 
 /* 
 
@@ -36,42 +40,44 @@ Telecommunications engineering technicians (3522)
 
 * All of subgroup 21 except 2163 and 2166
 
-replace science_careers = 1 if (OCOD3_N >= 2100) & (OCOD3_N <= 2162)
-replace science_careers = 1 if OCOD3_N == 2164 | OCOD3_N == 2165
+replace science_careers`i' = 1 if (OCOD`i'_N >= 2100) & (OCOD`i'_N <= 2162)
+replace science_careers`i' = 1 if OCOD`i'_N == 2164 | OCOD`i'_N == 2165
 
 * All of subgroup 22 except 223
 
-replace science_careers = 1 if (OCOD3_N >= 2200) & (OCOD3_N <= 2222)
-replace science_careers = 1 if (OCOD3_N >= 2240) & (OCOD3_N <= 2269)
+replace science_careers`i' = 1 if (OCOD`i'_N >= 2200) & (OCOD`i'_N <= 2222)
+replace science_careers`i' = 1 if (OCOD`i'_N >= 2240) & (OCOD`i'_N <= 2269)
 
 * All of subgroup 25
 
-replace science_careers = 1 if (OCOD3_N >= 2500) & (OCOD3_N <= 2529)
+replace science_careers`i' = 1 if (OCOD`i'_N >= 2500) & (OCOD`i'_N <= 2529)
 
 * Minor group 311
 
-replace science_careers = 1 if (OCOD3_N >= 3100) & (OCOD3_N <= 3119)
+replace science_careers`i' = 1 if (OCOD`i'_N >= 3100) & (OCOD`i'_N <= 3119)
 
 * Minor group 314
 
-replace science_careers = 1 if (OCOD3_N >= 3140) & (OCOD3_N <= 3143)
+replace science_careers`i' = 1 if (OCOD`i'_N >= 3140) & (OCOD`i'_N <= 3143)
 
 * 3155
 
-replace science_careers = 1 if OCOD3_N == 3155
+replace science_careers`i' = 1 if OCOD`i'_N == 3155
 
 * Minor group 321 except 3214
 
-replace science_careers = 1 if (OCOD3_N >= 3210) & (OCOD3_N <= 3213)
+replace science_careers`i' = 1 if (OCOD`i'_N >= 3210) & (OCOD`i'_N <= 3213)
 
 * 3522
 
-replace science_careers = 1 if OCOD3_N == 3522
+replace science_careers`i' = 1 if OCOD`i'_N == 3522
 
 * Code everything else as 0
 
-replace science_careers = 0 if science_careers == .
+replace science_careers`i' = 0 if science_careers`i' == .
 
 * Take care of not applicable, invalid, and no response
 
-replace science_careers = . if (OCOD3_N >= 9997) & (OCOD3_N <= 9999)
+replace science_careers`i' = . if (OCOD`i'_N >= 9997) & (OCOD`i'_N <= 9999)
+
+}
