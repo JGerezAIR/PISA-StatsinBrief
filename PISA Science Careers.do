@@ -86,6 +86,57 @@ replace science_careers`i' = . if (OCOD`i'_N >= 9997) & (OCOD`i'_N <= 9999)
 
 }
 
+* Create refined sciene careers categorical variable
+
+* 0 = non-science
+* 1 = science
+* 2 = medical
+* 3 = ICT
+* . = N/A, invalid, no response
+
+local var 1 2 3
+
+foreach i in `var' {
+
+gen science_cat_careers`i' = .
+
+replace science_cat_careers`i' = 1 if OCOD`i'_N == 2100
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2110) & (OCOD`i'_N <= 2114)
+replace science_cat_careers`i' = 1 if OCOD`i'_N == 2120
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2130) & (OCOD`i'_N <= 2133)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2140) & (OCOD`i'_N <= 2146)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2149) & (OCOD`i'_N <= 2153)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2160) & (OCOD`i'_N <= 2165)
+
+replace science_cat_careers`i' = 2 if OCOD`i'_N == 2200
+replace science_cat_careers`i' = 2 if (OCOD`i'_N >= 2210) & (OCOD`i'_N <= 2212)
+replace science_cat_careers`i' = 2 if (OCOD`i'_N >= 2220) & (OCOD`i'_N <= 2222)
+replace science_cat_careers`i' = 2 if OCOD`i'_N == 2230
+replace science_cat_careers`i' = 2 if OCOD`i'_N == 2240
+replace science_cat_careers`i' = 2 if OCOD`i'_N == 2250
+replace science_cat_careers`i' = 2 if (OCOD`i'_N >= 2260) & (OCOD`i'_N <= 2269)
+
+replace science_cat_careers`i' = 3 if OCOD`i'_N == 2500
+replace science_cat_careers`i' = 3 if (OCOD`i'_N >= 2510) & (OCOD`i'_N <= 2514)
+replace science_cat_careers`i' = 3 if (OCOD`i'_N >= 2519) & (OCOD`i'_N <= 2523)
+replace science_cat_careers`i' = 3 if OCOD`i'_N == 2529
+
+replace science_cat_careers`i' = 1 if OCOD`i'_N == 3100
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3110) & (OCOD`i'_N <= 3123)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3130) & (OCOD`i'_N <= 3135)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3139) & (OCOD`i'_N <= 3143)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3150) & (OCOD`i'_N <= 3155)
+
+replace science_cat_careers`i' = 2 if (OCOD`i'_N >= 3210) & (OCOD`i'_N <= 3213)
+
+replace science_cat_careers`i' = 1 if OCOD`i'_N == 3522
+
+* Take care of not applicable, invalid, and no response
+
+replace science_cat_careers`i' = . if (OCOD`i'_N >= 9997) & (OCOD`i'_N <= 9999)
+
+}
+
 * Generate new r_escs, using the seed "5094" from the repest source code
 
 * Need to install package 
