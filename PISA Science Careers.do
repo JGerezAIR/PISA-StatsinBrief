@@ -8,7 +8,7 @@ merge m:1 cntschid using "H:/5.2_main/PISA/PISA 2015/PISA-StatsinBrief/PISA 2015
 
 * Recode occupational categories into binary science vs. non-science based on Volume 1 of the PISA report
 
-* Create new science careers variable
+* Create new science careers dummy variable
 
 local var 1 2 3
 
@@ -107,3 +107,10 @@ bysort cntryid: tab r_escs_quartiles [aw=W_FSTUWT], m
 // This creates 2 equal sized groups (50% each)
 bysort cntryid: tab r_escs_2cat [aw=W_FSTUWT]
 bysort cntryid: tab r_escs_2cat [aw=W_FSTUWT], m
+
+* School location variable
+
+gen urban_dummy = .
+
+replace urban_dummy = 0 if SC001Q01TA <= 3
+replace urban_dummy = 1 if SC001Q01TA >= 4
