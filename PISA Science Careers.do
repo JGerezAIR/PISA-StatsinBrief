@@ -86,7 +86,7 @@ replace science_careers`i' = . if (OCOD`i'_N >= 9997) & (OCOD`i'_N <= 9999)
 
 }
 
-* Create refined sciene careers categorical variable
+* Create refined science careers categorical variable
 
 * 0 = non-science
 * 1 = science
@@ -131,9 +131,68 @@ replace science_cat_careers`i' = 2 if (OCOD`i'_N >= 3210) & (OCOD`i'_N <= 3213)
 
 replace science_cat_careers`i' = 1 if OCOD`i'_N == 3522
 
+* Code everything else as 0
+
+replace science_careers`i' = 0 if science_careers`i' == .
+
 * Take care of not applicable, invalid, and no response
 
 replace science_cat_careers`i' = . if (OCOD`i'_N >= 9997) & (OCOD`i'_N <= 9999)
+
+}
+
+* Create more general categorical science career variable (just engineering and medical)
+
+* 0 = non-science
+* 1 = science
+* 2 = medical
+* . = N/A, invalid, no response
+
+local var 1 2 3
+
+foreach i in `var' {
+
+gen science_gen_cat_careers`i' = .
+
+replace science_gen_cat_careers`i' = 0 if science_cat_careers`i' == 0
+replace science_gen_cat_careers`i' = 1 if science_cat_careers`i' == 1 | science_cat_careers`i' == 3
+replace science_gen_cat_careers`i' = 2 if science_cat_careers`i' == 2
+
+}
+
+* Generate career dummies
+
+local var 1 2 3
+
+foreach i in `var' {
+
+gen nonscience_dummy`i' = .
+
+replace nonscience_dummy`i' = 0 if science_cat_careers`i' >= 1
+replace nonscience_dummy`i' = 1 if science_cat_careers`i' == 0
+
+gen science_dummy`i' = .
+
+replace science_dummy`i' = 0 if science_cat_careers`i' == 0
+replace science_dummy`i' = 0 if science_cat_careers`i' >= 2
+replace science_dummy`i' = 1 if science_cat_careers`i' == 1
+
+gen science_gen_dummy`i' = .
+
+replace science_gen_dummy`i' = 0 if science_cat_careers`i' == 0
+replace science_gen_dummy`i' = 0 if science_cat_careers`i' == 2
+replace science_gen_dummy`i' = 1 if science_cat_careers`i' == 1 | science_cat_careers`i' == 3
+
+gen medicine_dummy`i' = .
+
+replace medicine_dummy`i' = 0 if science_cat_careers`i' <= 1
+replace medicine_dummy`i' = 0 if science_cat_careers`i' == 3
+replace medicine_dummy`i' = 1 if science_cat_careers`i' == 2
+
+gen ict_dummy`i' = .
+
+replace ict_dummy`i' = 0 if science_cat_careers`i' <= 2
+replace ict_dummy`i' = 0 if science_cat_careers`i' == 3
 
 }
 
