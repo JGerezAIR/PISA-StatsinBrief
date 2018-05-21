@@ -2,6 +2,10 @@
 
 use "H:/5.2_main/PISA/PISA 2015/PISA-StatsinBrief/PISA 2015 USA Student Background.dta"
 
+* Merge in school background file
+
+merge m:1 cntschid using "H:/5.2_main/PISA/PISA 2015/PISA-StatsinBrief/PISA 2015 USA School Background.dta"
+
 * Recode occupational categories into binary science vs. non-science based on Volume 1 of the PISA report
 
 * Create new science careers variable
