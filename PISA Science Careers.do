@@ -84,19 +84,22 @@ replace science_careers`i' = . if (OCOD`i'_N >= 9997) & (OCOD`i'_N <= 9999)
 
 * Generate new r_escs, using the seed "5094" from the repest source code
 
+* Need to install package 
+* ssc install egenmore
+
 set seed 5094
 bysort cntryid: gen r_escs = escs + 0.0001*runiform() if  escs != .
 
 * Use egen on r_escs to create r_escs_quartiles
 
-egen r_escs_quartiles = xtile(r_escs), by(cntryid) nq(4) weight(w_fstuwt)
-egen r_escs_2cat = xtile(r_escs), by(cntryid) nq(2) weight(w_fstuwt)
+egen r_escs_quartiles = xtile(r_escs), by(cntryid) nq(4) weight(W_FSTUWT)
+egen r_escs_2cat = xtile(r_escs), by(cntryid) nq(2) weight(W_FSTUWT)
 
 	
 // This creates 4 equal sized groups (25% each)
-bysort cntryid: tab r_escs_quartiles [aw=w_fstuwt]
-bysort cntryid: tab r_escs_quartiles [aw=w_fstuwt], m
+bysort cntryid: tab r_escs_quartiles [aw=W_FSTUWT]
+bysort cntryid: tab r_escs_quartiles [aw=W_FSTUWT], m
 
 // This creates 2 equal sized groups (50% each)
-bysort cntryid: tab r_escs_2cat [aw=w_fstuwt]
-bysort cntryid: tab r_escs_2cat [aw=w_fstuwt], m
+bysort cntryid: tab r_escs_2cat [aw=W_FSTUWT]
+bysort cntryid: tab r_escs_2cat [aw=W_FSTUWT], m
