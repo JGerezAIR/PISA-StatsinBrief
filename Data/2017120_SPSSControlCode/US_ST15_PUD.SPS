@@ -1,3 +1,4 @@
+* Encoding: windows-1252.
 *------------------------------------------------------------------------------*
  |                                                                             |
  |                                  PISA 2015                                  |
@@ -27,7 +28,7 @@
 
 * Read the data file.
 
-FILE HANDLE DATA / NAME="[FILE SPECIFICATION]" LRECL=3118.
+FILE HANDLE DATA / NAME="H:\5.2_main\PISA\PISA 2015\PISA-StatsinBrief\Data\US_ST15_PUD.txt" LRECL=3118.
 DATA LIST FILE=DATA /
    CNTRYID 1-3 CNT 4-6 (A) CNTSCHID 7-14 CNTSTUID 15-22 CYC 23-26 (A) NatCen
    27-32 (A) Region 33-37 STRATUM 38-44 (A) SUBNATIO 45-51 (A) OECD 52
