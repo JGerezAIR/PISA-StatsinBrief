@@ -106,12 +106,12 @@ replace science_cat_careers`i' = 1 if OCOD`i'_N == 2120
 replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2130) & (OCOD`i'_N <= 2133)
 replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2140) & (OCOD`i'_N <= 2146)
 replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2149) & (OCOD`i'_N <= 2153)
-replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2160) & (OCOD`i'_N <= 2165)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2160) & (OCOD`i'_N <= 2162)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 2164) & (OCOD`i'_N <= 2165)
 
 replace science_cat_careers`i' = 2 if OCOD`i'_N == 2200
 replace science_cat_careers`i' = 2 if (OCOD`i'_N >= 2210) & (OCOD`i'_N <= 2212)
 replace science_cat_careers`i' = 2 if (OCOD`i'_N >= 2220) & (OCOD`i'_N <= 2222)
-replace science_cat_careers`i' = 2 if OCOD`i'_N == 2230
 replace science_cat_careers`i' = 2 if OCOD`i'_N == 2240
 replace science_cat_careers`i' = 2 if OCOD`i'_N == 2250
 replace science_cat_careers`i' = 2 if (OCOD`i'_N >= 2260) & (OCOD`i'_N <= 2269)
@@ -122,10 +122,9 @@ replace science_cat_careers`i' = 3 if (OCOD`i'_N >= 2519) & (OCOD`i'_N <= 2523)
 replace science_cat_careers`i' = 3 if OCOD`i'_N == 2529
 
 replace science_cat_careers`i' = 1 if OCOD`i'_N == 3100
-replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3110) & (OCOD`i'_N <= 3123)
-replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3130) & (OCOD`i'_N <= 3135)
-replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3139) & (OCOD`i'_N <= 3143)
-replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3150) & (OCOD`i'_N <= 3155)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3110) & (OCOD`i'_N <= 3119)
+replace science_cat_careers`i' = 1 if (OCOD`i'_N >= 3140) & (OCOD`i'_N <= 3143)
+replace science_cat_careers`i' = 1 if OCOD`i'_N == 3155
 
 replace science_cat_careers`i' = 2 if (OCOD`i'_N >= 3210) & (OCOD`i'_N <= 3213)
 
