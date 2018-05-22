@@ -132,7 +132,7 @@ replace science_cat_careers`i' = 1 if OCOD`i'_N == 3522
 
 * Code everything else as 0
 
-replace science_careers`i' = 0 if science_careers`i' == .
+replace science_cat_careers`i' = 0 if science_cat_careers`i' == .
 
 * Take care of not applicable, invalid, and no response
 
