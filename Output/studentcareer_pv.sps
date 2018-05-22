@@ -1,11 +1,11 @@
 * Script created using the IEA IDB Analyzer (Version 4.0.21).
-* Created on 5/18/2018 at 2:41 PM.
+* Created on 5/22/2018 at 12:53 PM.
 * Press Ctrl+A followed by Ctrl+R to submit this analysis. 
 
 include file = "C:\Users\JGerez\AppData\Roaming\IEA\IDBAnalyzerV4\bin\Data\Templates\SPSS_Macros\JB_PV.ieasps".
 
-JB_PV 	 infile="H:\5.2_main\PISA\PISA 2015\PISA-StatsinBrief\PISA2015_USAStudentBackground_NewCoding.sav"/
-	 cvar=CNTRYID SCIENCE_CAREERS3 /
+JB_PV 	 infile="H:\5.2_main\PISA\PISA 2015\PISA-StatsinBrief\PISA_2015_USA_Merged_new_coding.sav"/
+	 cvar=CNTRYID SCIENCE_GEN_CAT_CAREERS3 /
 	 rootpv=PV /
 	 tailpv=SCIE /
 	 npv=10/
@@ -27,6 +27,6 @@ JB_PV 	 infile="H:\5.2_main\PISA\PISA 2015\PISA-StatsinBrief\PISA2015_USAStudent
 	 graphs=N/
 	 selcrit = /
 	 selvar = /
-	 outdir="H:\5.2_main\PISA\PISA 2015\PISA-StatsinBrief"/
+	 outdir="H:\5.2_main\PISA\PISA 2015\PISA-StatsinBrief\Output"/
 	 outfile="studentcareer_pv".
 
