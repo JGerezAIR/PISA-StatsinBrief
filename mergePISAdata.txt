@@ -1,0 +1,17 @@
+* PISA 2015 *
+
+* Now we will do the same procedure with the PISA 2012 data files
+
+GET FILE = 'G:\PISA\cog + cps data files\Cy6_ms_cmb_stu_qqq.sav'.
+SORT CASES BY CNTSTUID.
+SAVE OUTFILE = 'G:\PISA\merge pisa data\Cy6_ms_cmb_stu_qqq.sav'.
+
+GET FILE = 'G:\PISA\cog + cps data files\CY6_MS_CMB_STU_CPS.sav'.
+SORT CASES BY CNTSTUID.
+SAVE OUTFILE = 'G:\PISA\merge pisa data\CY6_MS_CMB_STU_CPS.sav'.
+
+MATCH FILES 
+    FILE= 'G:\PISA\merge pisa data\Cy6_ms_cmb_stu_qqq.sav' 
+    TABLE= 'G:\PISA\merge pisa data\CY6_MS_CMB_STU_CPS.sav'
+BY CNTSTUID.
+SAVE OUTFILE = 'G:\PISA\merge pisa data\PISA2015_merged.sav'.
