@@ -140,7 +140,7 @@ replace science_cat_careers`i' = . if (OCOD`i'_N >= 9997) & (OCOD`i'_N <= 9999)
 
 }
 
-* Create more general categorical science career variable (just engineering and medical)
+* Create more general categorical science career variable (1 if science -- including science and ICT but not medical)
 
 * 0 = non-science
 * 1 = science
@@ -161,20 +161,31 @@ replace science_gen_cat_careers`i' = 2 if science_cat_careers`i' == 2
 
 * Generate career dummies
 
+* science_dummy = 1 if ANY science career, else 0
+* science_exclusive_dummy = 1 if just science career (not ICT or medical), else 0
+* science_gen_dummy = 1 if science career but NOT medical, else 0
+* medicine_dummy = 1 if medicine career, else 0
+* ict_dummy = 1 if ict career, else 0
+
 local var 1 2 3
 
 foreach i in `var' {
+
+gen science_dummy`i' = .
+
+replace science_dummy`i' = 0 if science_cat_careers`i' == 0
+replace science_dummy`i' = 1 if science_cat_careers`i' >= 1
 
 gen nonscience_dummy`i' = .
 
 replace nonscience_dummy`i' = 0 if science_cat_careers`i' >= 1
 replace nonscience_dummy`i' = 1 if science_cat_careers`i' == 0
 
-gen science_dummy`i' = .
+gen science_exclusive_dummy`i' = .
 
-replace science_dummy`i' = 0 if science_cat_careers`i' == 0
-replace science_dummy`i' = 0 if science_cat_careers`i' >= 2
-replace science_dummy`i' = 1 if science_cat_careers`i' == 1
+replace science_exclusive_dummy`i' = 0 if science_cat_careers`i' == 0
+replace science_exclusive_dummy`i' = 0 if science_cat_careers`i' >= 2
+replace science_exclusive_dummy`i' = 1 if science_cat_careers`i' == 1
 
 gen science_gen_dummy`i' = .
 
@@ -191,9 +202,17 @@ replace medicine_dummy`i' = 1 if science_cat_careers`i' == 2
 gen ict_dummy`i' = .
 
 replace ict_dummy`i' = 0 if science_cat_careers`i' <= 2
-replace ict_dummy`i' = 0 if science_cat_careers`i' == 3
+replace ict_dummy`i' = 1 if science_cat_careers`i' == 3
 
 }
+
+* Generate parent dummy 
+* 1 if at least one parent is in a science career (based on science_dummy definition) 0 if not
+
+gen science_parent_dummy = .
+
+replace science_parent_dummy = 0 if (science_dummy1) == 0 & (science_dummy2 == 0)
+replace science_parent_dummy = 1 if science_dummy1 == 1 | science_dummy2 == 1
 
 * Generate new r_escs, using the seed "5094" from the repest source code
 
@@ -207,7 +226,6 @@ bysort cntryid: gen r_escs = escs + 0.0001*runiform() if  escs != .
 
 egen r_escs_quartiles = xtile(r_escs), by(cntryid) nq(4) weight(W_FSTUWT)
 egen r_escs_2cat = xtile(r_escs), by(cntryid) nq(2) weight(W_FSTUWT)
-
 	
 // This creates 4 equal sized groups (25% each)
 bysort cntryid: tab r_escs_quartiles [aw=W_FSTUWT]
