@@ -103,7 +103,7 @@ Execute.
 
 *Recode occupational categories into binary science vs. non-science based on Volume 1 of the PISA report
 *Father recoding.
-IF (OCOD2_destring>=32 & OCOD1_destring<=52) p2_Fa_binary=1.
+IF (OCOD2_destring>=32 & OCOD2_destring<=52) p2_Fa_binary=1.
 IF (OCOD2_destring=54) p2_Fa_binary=1.
 IF (OCOD2_destring>=56 & OCOD2_destring<=65) p2_Fa_binary=1.
 IF (OCOD2_destring>=90 & OCOD2_destring<=95) p2_Fa_binary=1.
